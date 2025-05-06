@@ -33,7 +33,6 @@
       font-size: 18px;
       line-height: 1.6;
     }
-    /* Header */
     header {
       background: var(--starbucks-dark);
       color: var(--text-light);
@@ -83,7 +82,6 @@
       color: var(--starbucks-accent);
       border-bottom: 2px solid var(--starbucks-accent);
     }
-    /* Hero Section */
     .hero {
       background: linear-gradient(90deg, var(--starbucks-green) 60%, var(--starbucks-accent) 100%);
       color: var(--text-light);
@@ -136,7 +134,6 @@
       box-shadow: 0 4px 16px rgba(30,57,50,0.10);
       background: #fff;
     }
-    /* Cards Section */
     .cards-section {
       max-width: 1200px;
       margin: 3rem auto;
@@ -187,7 +184,6 @@
       color: var(--starbucks-dark);
       text-decoration: underline;
     }
-    /* Menu List */
     .menu-list {
       list-style: none;
       padding: 0;
@@ -211,7 +207,12 @@
       color: var(--starbucks-green);
       font-weight: 600;
     }
-    /* Contact Form */
+    .rewards-list {
+      list-style: disc inside;
+      margin: 0 0 1rem 1rem;
+      padding: 0;
+      color: var(--starbucks-dark);
+    }
     .contact-form {
       width: 100%;
       display: flex;
@@ -252,7 +253,6 @@
     .form-message.success {
       color: var(--success);
     }
-    /* Modal */
     .modal {
       display: none;
       position: fixed;
@@ -328,7 +328,6 @@
     .order-message.error {
       color: var(--error);
     }
-    /* Footer */
     footer {
       background: var(--starbucks-dark);
       color: var(--text-light);
@@ -337,7 +336,6 @@
       font-size: 1rem;
       margin-top: 3rem;
     }
-    /* Responsive */
     @media (max-width: 900px) {
       .hero {
         flex-direction: column;
@@ -379,7 +377,6 @@
   <header>
     <div class="navbar">
       <div class="logo">
-        <!-- Placeholder Starbucks-like logo -->
         <img src="images/19fa93fa-6ff9-4157-a02d-5d9b1f5bbd9b.png" alt="Logo" />
         <span>Starbrew</span>
       </div>
@@ -420,7 +417,13 @@
         <button onclick="openOrderModal()">Order from Menu &rarr;</button>
       </div>
       <div class="card" id="contact">
-        <h2>Contact Us</h2>
+        <h2>Rewards & Contact Us</h2>
+        <ul class="rewards-list">
+          <li>Earn 2 Stars per $1 spent in store or online.</li>
+          <li>Free drink or treat on your birthday.</li>
+          <li>Exclusive member offers and early access to new products.</li>
+          <li>Redeem Stars for free drinks, food, and more.</li>
+        </ul>
         <p>Have questions or feedback? Reach out to our team and we'll be happy to help.</p>
         <form class="contact-form" id="contactForm" autocomplete="off">
           <input type="text" name="name" placeholder="Your Name" required />
