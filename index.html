@@ -211,13 +211,6 @@
       color: var(--starbucks-green);
       font-weight: 600;
     }
-    /* Rewards List */
-    .rewards-list {
-      list-style: disc inside;
-      margin: 0 0 1rem 1rem;
-      padding: 0;
-      color: var(--starbucks-dark);
-    }
     /* Contact Form */
     .contact-form {
       width: 100%;
@@ -302,13 +295,12 @@
       color: var(--starbucks-dark);
       cursor: pointer;
     }
-    .order-form label, .signup-form label {
+    .order-form label {
       font-weight: 500;
       margin-bottom: 0.2rem;
       display: block;
     }
-    .order-form select, .order-form input[type="number"], .order-form input[type="text"],
-    .signup-form input[type="text"], .signup-form input[type="email"], .signup-form input[type="password"] {
+    .order-form select, .order-form input[type="number"], .order-form input[type="text"] {
       width: 100%;
       padding: 0.5rem;
       margin-bottom: 1rem;
@@ -316,7 +308,7 @@
       border: 1px solid #ccc;
       font-size: 1rem;
     }
-    .order-form button, .signup-form button {
+    .order-form button {
       background: var(--starbucks-green);
       color: #fff;
       border: none;
@@ -327,17 +319,13 @@
       cursor: pointer;
       transition: background 0.2s;
     }
-    .order-form button:hover, .signup-form button:hover {
+    .order-form button:hover {
       background: var(--starbucks-dark);
     }
-    .order-message, .signup-message {
-      font-size: 1rem;
-      margin-top: 0.5rem;
-    }
-    .order-message.success, .signup-message.success {
+    .order-message.success {
       color: var(--success);
     }
-    .order-message.error, .signup-message.error {
+    .order-message.error {
       color: var(--error);
     }
     /* Footer */
@@ -398,7 +386,6 @@
       <nav>
         <a href="#home" class="nav-link active">Home</a>
         <a href="#menu" class="nav-link">Menu</a>
-        <a href="#rewards" class="nav-link">Rewards</a>
         <a href="#contact" class="nav-link">Contact</a>
       </nav>
     </div>
@@ -431,16 +418,6 @@
           <li class="menu-item"><span>Chocolate Croissant</span> <span class="price">$2.50</span></li>
         </ul>
         <button onclick="openOrderModal()">Order from Menu &rarr;</button>
-      </div>
-      <div class="card" id="rewards">
-        <h2>Rewards</h2>
-        <ul class="rewards-list">
-          <li>Earn 2 Stars per $1 spent in store or online.</li>
-          <li>Free drink or treat on your birthday.</li>
-          <li>Exclusive member offers and early access to new products.</li>
-          <li>Redeem Stars for free drinks, food, and more.</li>
-        </ul>
-        <button id="joinNowBtn">Join Now &rarr;</button>
       </div>
       <div class="card" id="contact">
         <h2>Contact Us</h2>
@@ -480,23 +457,6 @@
         <input type="text" id="orderName" name="name" placeholder="Enter your name" required />
         <button type="submit">Submit Order</button>
         <div class="order-message" id="orderFormMsg"></div>
-      </form>
-    </div>
-  </div>
-  <!-- Join Now Modal -->
-  <div class="modal" id="joinModal">
-    <div class="modal-content">
-      <button class="close-modal" onclick="closeJoinModal()" aria-label="Close">&times;</button>
-      <h2>Join Starbrew Rewards</h2>
-      <form class="signup-form" id="signupForm" autocomplete="off">
-        <label for="signupName">Full Name</label>
-        <input type="text" id="signupName" name="name" placeholder="Enter your name" required />
-        <label for="signupEmail">Email</label>
-        <input type="email" id="signupEmail" name="email" placeholder="Enter your email" required />
-        <label for="signupPassword">Password</label>
-        <input type="password" id="signupPassword" name="password" placeholder="Create a password" required minlength="6" />
-        <button type="submit">Sign Up</button>
-        <div class="signup-message" id="signupFormMsg"></div>
       </form>
     </div>
   </div>
@@ -555,53 +515,15 @@
       }, 3000);
     });
 
-    // Join Now Modal logic
-    function openJoinModal() {
-      document.getElementById('joinModal').classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeJoinModal() {
-      document.getElementById('joinModal').classList.remove('active');
-      document.body.style.overflow = '';
-      document.getElementById('signupForm').reset();
-      document.getElementById('signupFormMsg').textContent = '';
-    }
-    document.getElementById('joinNowBtn').addEventListener('click', openJoinModal);
-
-    // Signup form logic
-    document.getElementById('signupForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      var name = document.getElementById('signupName').value.trim();
-      var email = document.getElementById('signupEmail').value.trim();
-      var password = document.getElementById('signupPassword').value;
-      var msg = document.getElementById('signupFormMsg');
-      if (!name || !email || !password) {
-        msg.textContent = 'Please fill in all fields.';
-        msg.className = 'signup-message error';
-        return;
-      }
-      if (password.length < 6) {
-        msg.textContent = 'Password must be at least 6 characters.';
-        msg.className = 'signup-message error';
-        return;
-      }
-      msg.textContent = 'Welcome, ' + name + '! Your account has been created.';
-      msg.className = 'signup-message success';
-      setTimeout(closeJoinModal, 2000);
-    });
-
     // Close modals on outside click
     window.addEventListener('click', function(e) {
       var orderModal = document.getElementById('orderModal');
-      var joinModal = document.getElementById('joinModal');
       if (e.target === orderModal) closeOrderModal();
-      if (e.target === joinModal) closeJoinModal();
     });
     // Close modals on Escape key
     window.addEventListener('keydown', function(e) {
       if (e.key === "Escape") {
         closeOrderModal();
-        closeJoinModal();
       }
     });
 
@@ -621,7 +543,7 @@
     });
 
     // Highlight active nav link on scroll
-    const sections = ['home', 'menu', 'rewards', 'contact'];
+    const sections = ['home', 'menu', 'contact'];
     window.addEventListener('scroll', function() {
       let scrollPos = window.scrollY + 80;
       let found = false;
